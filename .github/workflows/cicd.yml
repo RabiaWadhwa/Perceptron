@@ -3,26 +3,23 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-# name of the workflow
 name: Upload Python Package
 
-#when to execute - when you push changes on "main" branch
 on:
   push:
     branches:
     - main
-    # - dev  => add for more branches if needed
 
-# what to execute - lists jobs
+
 jobs:
-  deploy: # first job ,you can list more jobs as well
-    runs-on: ubuntu-latest # CREATE UBUNTU ENVIRONMENT
+  deploy:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Python  #sets up python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.7'  # python version needed
+          python-version: '3.7'
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
