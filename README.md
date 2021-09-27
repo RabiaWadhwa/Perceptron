@@ -41,3 +41,49 @@ jobs:
 
         
 ```
+
+
+# How to use package
+```python
+
+from perceptron_package.perceptron_class import Perceptron 
+import pandas as pd
+
+def prepare_data(df):
+  """ Used to separate dependent and independent features       
+
+  Args:
+      df (pd.dataframe): pandas dataframe
+
+  Returns:
+      tuple: returns tuple of dependent & independent variables
+  """
+  X = df.drop("y",axis=1)
+  y = df["y"]
+  return X,y
+
+
+
+def main(data ,eta,epochs):
+       df = pd.DataFrame(data)
+       df  # Shape = (4,3)
+
+       X,y = prepare_data(df) 
+
+       model = Perceptron(eta=eta, epochs=epochs)  # Creating object of class Perceptron
+       model.fit(X, y) # Weights in last epoch are considered as final weights for prediction
+
+       _ = model.total_loss() # last Epoch's Sum of Errors , '_' indicates dummy variable
+
+       
+if __name__ == '__main__': # define entry point of program execution
+       AND = {"x1":[0,0,1,1],
+              "x2":[0,1,0,1],
+              "y" :[0,0,0,1]
+              }
+
+       ETA = 0.3 # between 0 and 1
+       EPOCHS = 10
+       main(AND,ETA,EPOCHS)
+      
+```
